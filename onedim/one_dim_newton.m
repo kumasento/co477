@@ -20,7 +20,7 @@ function minimiser = one_dim_newton(f, x0, varargin)
         % manually calculate second order derivative
         g0 = grad(f, x0);
         g1 = grad(f, x0 + 2*h);
-        gg = (g1 - g0) / (2*h); % might not be precise
+        gg = (g1 - g0) / (2*h); % might not be precise, sort of quasi
         x1 = x0 - g0 / gg;
         fprintf('iter=%d x0=%.6f g0=%.6f g1=%.6f gg=%.6f g0/gg=%.6f\n',...
             iterCount, x0, g0, g1, gg, g0/gg);
@@ -33,18 +33,4 @@ function minimiser = one_dim_newton(f, x0, varargin)
     end
     
     minimiser = x1;
-end
-
-function g = grad(f, x)
-% GRAD get function f's gradient at x
-    p = inputParser;
-    p.addRequired('f', @(x) validateattributes(x, {'function_handle'}, {'scalar'}));
-    p.addRequired('x', @isscalar);
-    p.parse(f, x);
-    
-    f = p.Results.f;
-    x = p.Results.x;
-    h = 1e-4; % delta for gradient
-    
-    g = (f(x + h) - f(x)) / h;
 end
