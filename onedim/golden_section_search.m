@@ -26,6 +26,8 @@ function minimum = golden_section_search(f, a0, b0, varargin)
     
     iterCount = 0;
     while iterCount < inputs.maxIter % prevent infinite loop
+        fprintf('a1 = %.6f b1 = %.6f f_a=%.6f f_b = %.6f\n',...
+            a1, b1, f_a, f_b);
         if abs(f_a - f_b) < inputs.bound
             % if satisfies the condition, break the loop
             break;
