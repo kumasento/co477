@@ -6,3 +6,4 @@ algorithms.
 Available functions:
 
 1. Golden section search
+2. 1D Newton method (may not work).
