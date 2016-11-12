@@ -1,4 +1,4 @@
-function minimiser = backtracking(f, grad, x, alpha, beta)
+function minimiser = backtracking(f, grad, x, alpha, beta, start)
 % BACKTRACKING An implementation for the backtracking algorithm
 % 
 % INPUTS:   f       - the function to be optimised
@@ -6,8 +6,9 @@ function minimiser = backtracking(f, grad, x, alpha, beta)
 %           alpha   - constant alpha for backtracking algorithm
 %           x       - current step function input
 %           beta    - constant beta for backtracking algorithm
+%           start   - starting point
 
-step_size   = 1;                        % initialised with 1
+step_size   = start;                    % initialised with 1
 grad_val    = grad(x);                  % gradient for current input
 grad_norm   = dot(grad_val, grad_val);  % *cached* gradient vector norm
 fun_x       = f(x);                     % *cached* function value at x

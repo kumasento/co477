@@ -117,7 +117,7 @@ for i = 1:num_iter
             step_size = secant(phi, secant_a0, secant_a_1, grad_phi);
         elseif mode == 3
             step_size = backtracking(f, grad, beta_guess_iter(i,:), ...
-                0.5, 0.8);
+                0.5, 0.8, 1e-3);
         else
             fprintf('Error mode number, exiting ...\n');
             return;
@@ -187,10 +187,14 @@ fprintf('Total time:                 %f s\n', total_time);
 fprintf('Time per iteration:         %f s\n', total_time/total_num_iter);
 
 %% Save gradient descent variables ----------------------------------------
-save(strcat(file_prefix, 'variables'), 'fcn_val_iter');
-save(strcat(file_prefix, 'variables'), 'step_size_iter', '-append');
-save(strcat(file_prefix, 'variables'), 'total_num_iter', '-append');
-save(strcat(file_prefix, 'variables'), 'total_time', '-append');
+snapshot_file_name = strcat(file_prefix, 'snapshot_', num2str(num_iter));
+save(snapshot_file_name, 'fcn_val_iter');
+save(snapshot_file_name, 'step_size_iter', '-append');
+save(snapshot_file_name, 'convgsd', '-append');
+save(snapshot_file_name, 'lenXsd', '-append');
+save(snapshot_file_name, 'diffFsd', '-append');
+save(snapshot_file_name, 'total_num_iter', '-append');
+save(snapshot_file_name, 'total_time', '-append');
 
 %% Return -----------------------------------------------------------------
 ReturnVal = beta_guess;
