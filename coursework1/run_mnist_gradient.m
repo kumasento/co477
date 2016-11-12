@@ -62,8 +62,9 @@ fprintf('Plotting ...\n');
 
 fig = figure;
 for i=0:max_mode
-  plot(1:total_num_iters(i+1), fcn_val_iters(i+1,:));
-  hold on;
+    plot(1:total_num_iters(i+1), ...
+        fcn_val_iters(i+1,1:total_num_iters(i+1)));
+    hold on;
 end
 hold off;
 
@@ -73,6 +74,7 @@ ylabel('Function Value');
 title('Comparison of Convergence');
 
 print(fig, strcat('figures/line_search_', num2str(max_iter)), '-depsc');
+
 end
 
 function file_name = construct_snapshot_name(method_name, max_iter)

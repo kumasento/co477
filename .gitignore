@@ -1,4 +1,4 @@
 *.m~
 # ignore data currently
 *.mat
-tmp/
+!**/tmp/*.mat
